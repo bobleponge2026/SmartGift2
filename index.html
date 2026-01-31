@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sélecteur de Cadeaux Magique - Trouvez le cadeau parfait en 3 étapes simples">
+    <title>Sélecteur de Cadeaux Magique ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="animated-background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🎁</span>
+                <h1>Sélecteur de Cadeaux <span class="gold">Magique</span></h1>
+            </div>
+            <p class="subtitle">Trouvez le cadeau parfait en 3 étapes simples</p>
+        </header>
+
+        <!-- Progress Indicator -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="steps-indicator">
+                <div class="step-dot active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Destinataire</span>
+                </div>
+                <div class="step-dot" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Budget</span>
+                </div>
+                <div class="step-dot" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Passions</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wizard Form -->
+        <main class="wizard-container">
+            <!-- Step 1: Recipient -->
+            <section class="wizard-step active" id="step1">
+                <div class="glass-card">
+                    <h2>Pour qui est le cadeau ?</h2>
+                    <p class="step-description">Sélectionnez le destinataire de votre attention</p>
+
+                    <div class="recipient-grid">
+                        <button class="recipient-option" data-recipient="homme">
+                            <span class="recipient-icon">👨</span>
+                            <span class="recipient-label">Homme</span>
+                        </button>
+                        <button class="recipient-option" data-recipient="femme">
+                            <span class="recipient-icon">👩</span>
+                            <span class="recipient-label">Femme</span>
+                        </button>
+                        <button class="recipient-option" data-recipient="enfant">
+                            <span class="recipient-icon">👶</span>
+                            <span class="recipient-label">Enfant</span>
+                        </button>
+                        <button class="recipient-option" data-recipient="animal">
+                            <span class="recipient-icon">🐾</span>
+                            <span class="recipient-label">Animal</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Budget -->
+            <section class="wizard-step" id="step2">
+                <div class="glass-card">
+                    <h2>Quel est votre budget ?</h2>
+                    <p class="step-description">Définissez votre fourchette de prix</p>
+
+                    <div class="budget-container">
+                        <div class="budget-display">
+                            <span class="budget-value" id="budgetValue">100</span>
+                            <span class="budget-currency">€</span>
+                        </div>
+
+                        <div class="slider-container">
+                            <input type="range" id="budgetSlider" class="budget-slider" min="10" max="500" value="100"
+                                step="10">
+                            <div class="slider-labels">
+                                <span>10€</span>
+                                <span>500€</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" id="backToStep1">← Retour</button>
+                        <button class="btn btn-primary" id="toStep3">Continuer →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dynamic Quiz Step (Replaces Step 3 & Refinement) -->
+            <section class="wizard-step" id="dynamicQuizStep">
+                <div class="glass-card" id="dynamicQuestionContainer">
+                    <!-- Dynamic Content will be injected here -->
+                    <h2 id="dynamicQuestionTitle">Question Dynamique</h2>
+                    <p class="step-description" id="dynamicQuestionDesc">Description</p>
+                    <div class="refine-grid" id="dynamicOptionsGrid">
+                        <!-- Options injected via JS -->
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-secondary" id="dynamicBackBtn">← Retour</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Loading Screen -->
+            <section class="wizard-step" id="loadingScreen">
+                <div class="glass-card text-center loading-card">
+                    <div class="ai-loader">
+                        <div class="ai-circle"></div>
+                        <div class="ai-circle"></div>
+                        <div class="ai-circle"></div>
+                    </div>
+                    <h2 class="loading-title">Analyse du profil...</h2>
+                    <div class="loading-bar-container">
+                        <div class="loading-bar" id="loadingBar"></div>
+                    </div>
+                    <p class="loading-status" id="loadingStatus">Connexion à la base de données magique...</p>
+                </div>
+            </section>
+
+            <!-- Email Capture Step -->
+            <section class="wizard-step" id="emailCapture">
+                <div class="glass-card text-center" style="max-width: 500px; margin: 0 auto;">
+                    <h2>Sauvegardez votre sélection</h2>
+                    <p class="step-description">Recevez vos 3 idées cadeaux exclusives directement par email pour ne pas
+                        les perdre.</p>
+
+                    <div class="email-form" style="margin: 30px 0;">
+                        <input type="email" id="emailInput" placeholder="votre@email.com" class="glass-input">
+                        <button class="btn btn-primary" id="submitEmailBtn" style="width: 100%; margin-top: 15px;">
+                            Envoyer ma sélection 🎁
+                        </button>
+                    </div>
+
+                    <button class="btn-link" id="skipEmailBtn">Non merci, voir les résultats</button>
+                </div>
+            </section>
+
+            <!-- Results -->
+            <section class="wizard-step" id="results">
+                <div class="results-header">
+                    <h2>Vos cadeaux parfaits</h2>
+                    <p class="step-description">Voici nos suggestions personnalisées rien que pour vous</p>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Product cards will be inserted here by JavaScript -->
+                </div>
+
+                <div class="restart-container">
+                    <button class="btn btn-secondary" id="restartBtn">
+                        🔄 Recommencer la recherche
+                    </button>
+                </div>
+            </section>
+        </main>
+
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links" style="margin-bottom: 10px;">
+                <a href="#" id="btnAbout" class="footer-link">À propos</a>
+                <span class="separator">•</span>
+                <a href="#" id="btnLegal" class="footer-link">Mentions Légales</a>
+            </div>
+            <p>Fait avec <span class="heart">❤️</span> et un peu de magie</p>
+            <p class="legal-text">En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les
+                conditions requises.</p>
+        </footer>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal-overlay">
+        <div class="glass-card modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2 id="modalTitle">Titre</h2>
+            <div id="modalBody" class="modal-body-text">Contenu</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
